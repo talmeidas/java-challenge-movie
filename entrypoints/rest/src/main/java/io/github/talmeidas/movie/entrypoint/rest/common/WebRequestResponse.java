@@ -17,13 +17,9 @@ public class WebRequestResponse extends WebRequest {
 
     public WebRequestResponse() {
         super();
-        email = StringUtils.EMPTY;
-        fullName = StringUtils.EMPTY;
     }
 
     public WebRequestResponse(final WebRequest webRequest) {
         super();
-        email = webRequest.getEmail();
-        fullName = webRequest.getFullName();
     }
 }

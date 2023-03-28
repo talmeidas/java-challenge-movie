@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -36,29 +36,26 @@ class CountMovieControllerTest {
     @MockBean
     private WebRequest webRequest;
 
-    @DisplayName("Successful to start new game")
+    @DisplayName("Successful to count all movies")
     @Test
-    void SuccessfulToStartNewGame() throws Exception {
+    void successfulToGetAllMoviesCount() throws Exception {
         // Arrange
-        when(webRequest.getEmail()).thenReturn("joe.doe.one@xyz.com");
-        when(webRequest.getFullName()).thenReturn("Joe Doe");
-
         when(getAllMoviesCountUseCase.execute()).thenReturn(getAllMoviesCount());
 
         // Act
         // Assert
-        mockMvc.perform(post("/v1/movies")
+        mockMvc.perform(get("/v1/movies")
             .contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
             .andDo(print())
-            .andExpect(status().isCreated())
+            .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.total", is(10L)));
+            .andExpect(jsonPath("$.total", is(2)));
 
         verify(getAllMoviesCountUseCase, times(1)).execute();
         verifyNoMoreInteractions(getAllMoviesCountUseCase);
     }
 
     private static Long getAllMoviesCount() {
-        return 10L;
+        return 2L;
     }
 }

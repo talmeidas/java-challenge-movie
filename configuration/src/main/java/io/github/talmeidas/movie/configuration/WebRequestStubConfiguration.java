@@ -15,13 +15,6 @@ import java.util.List;
 @Profile("test")
 @Configuration
 public class WebRequestStubConfiguration {
-
-    private static final List<ImmutablePair<String, String>> PLAYERS = Arrays.asList(
-        new ImmutablePair<>("john.smith.zero@xyz.com", "John Smith"),
-        new ImmutablePair<>("joe.doe.one@xyz.com", "Joe Doe"),
-        new ImmutablePair<>("ashley.williams.two@xyz.com", "Ashley Williams")
-    );
-
     @Bean
     @Scope(scopeName = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
     public WebRequest getWebRequest() {
@@ -33,9 +26,6 @@ public class WebRequestStubConfiguration {
     }
 
     private WebRequest buildWebRequest(HttpServletRequest request) {
-        int playerId = NumberUtils.toInt(request.getHeader("PlayerId"));
-        int index = playerId < 0 || playerId > PLAYERS.size() - 1 ? 0 : playerId;
-        final ImmutablePair<String, String> player = PLAYERS.get(index);
-        return new WebRequest(player.getLeft(), player.getRight(), request.getRequestURI());
+        return new WebRequest(request.getRequestURI());
     }
 }
