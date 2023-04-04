@@ -46,7 +46,7 @@ jobs:
         run: mvn clean -Dmaven.test.skip=true
 
       - name: Maven Build
-        run: mvn install -Dmaven.test.skip=true
+        run: mvn -B package --file pom.xml install -Dmaven.test.skip=true
 
       - name: Run Tests
         run: mvn test -Dspring.profiles.active=test
