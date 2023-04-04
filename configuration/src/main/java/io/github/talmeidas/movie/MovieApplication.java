@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.cosium.spring.data.jpa.entity.graph.repository.support.EntityGraphJpaRepositoryFactoryBean;
 
+
 @SpringBootApplication
 @EnableJpaRepositories(basePackageClasses = MovieApplication.class, repositoryFactoryBeanClass = EntityGraphJpaRepositoryFactoryBean.class)
 public class MovieApplication {

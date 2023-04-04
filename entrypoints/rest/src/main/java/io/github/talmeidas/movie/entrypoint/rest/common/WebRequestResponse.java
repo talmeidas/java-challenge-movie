@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serial;
 
+
 @Getter
 @Setter
 @ToString
@@ -17,9 +18,13 @@ public class WebRequestResponse extends WebRequest {
 
     public WebRequestResponse() {
         super();
+        email = StringUtils.EMPTY;
+        fullName = StringUtils.EMPTY;
     }
 
     public WebRequestResponse(final WebRequest webRequest) {
         super();
+        email = webRequest.getEmail();
+        fullName = webRequest.getFullName();
     }
 }

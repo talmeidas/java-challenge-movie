@@ -17,6 +17,7 @@ import com.tngtech.archunit.lang.CompositeArchRule;
 import io.github.talmeidas.movie.MovieApplication;
 import org.slf4j.Logger;
 
+
 @AnalyzeClasses(packagesOf = MovieApplication.class)
 public class CodingRulesTest {
 

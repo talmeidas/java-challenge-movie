@@ -9,6 +9,7 @@ import com.tngtech.archunit.lang.ArchRule;
 
 import io.github.talmeidas.movie.MovieApplication;
 
+
 @AnalyzeClasses(packagesOf = MovieApplication.class)
 public class FrozenRulesTest {
 

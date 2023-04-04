@@ -6,7 +6,7 @@
 * This project uses Lombok, so enable annotation processing in your IDE
 
 ## Technology Stack
-* Language: [`Java 17`](https://www.java.com/) 
+* Language: [`Java 17`](https://www.java.com/)
 * Compilation: [`Maven`](https://maven.apache.org/)
 * Framework: [`SpringBoot`](https://spring.io/projects/spring-boot)
 * Database: [`H2`](http://h2database.com/)
@@ -17,12 +17,12 @@
 * Boilerplate code reducer: [`Lombok`](https://projectlombok.org/)
 * Logging: [`SLF4J`](https://www.slf4j.org/)
 
-* Tests: 
-    * Unit Testing: [`JUnit5`](https://junit.org/junit5/docs/current/user-guide/) 
-    * Mocking: [`Mockito`](https://site.mockito.org/)
-    * Mutation: Testing [`PIT Mutation Testing`](https://pitest.org/)
-    * Code Coverage: [`Jacoco`](https://www.jacoco.org)
-    * Architecture Testing: [`ArchUnit`](https://www.archunit.org/)
+* Tests:
+  * Unit Testing: [`JUnit5`](https://junit.org/junit5/docs/current/user-guide/)
+  * Mocking: [`Mockito`](https://site.mockito.org/)
+  * Mutation: Testing [`PIT Mutation Testing`](https://pitest.org/)
+  * Code Coverage: [`Jacoco`](https://www.jacoco.org)
+  * Architecture Testing: [`ArchUnit`](https://www.archunit.org/)
 
 ## Running the application locally
 
@@ -39,34 +39,24 @@ mvn -e clean install verify
 
 ## Available Endpoints
 
-* Swagger UI: [`http://localhost:8081/swagger-ui.html`](http://localhost:8081/swagger-ui.html)
-* H2 Console: [`http://localhost:8081/h2-console`](http://localhost:8081/h2-console)
+* Swagger UI: [`http://localhost:8085/swagger-ui.html`](http://localhost:8085/swagger-ui.html)
+* H2 Console: [`http://localhost:8085/h2-console`](http://localhost:8085/h2-console)
 
-## Usecases
+## Use cases
 
-### 1. Start the game
+### 1. Get a random movie
 ```
-curl -X POST "http://localhost:8081/v1/games" -H "accept: */*" -H "Accept-Language: pt_BR" -H "PlayerId: 0" -d ""
-```
-
-### 2. End the game
-```
-curl -X PATCH "http://localhost:8081/v1/games" -H "accept: */*" -H "Accept-Language: pt_BR" -H "PlayerId: 0"
+curl -X GET "http://localhost:8085/v1/movies/random" -H "accept: */*" -H "Accept-Language: pt_BR"
 ```
 
-### 3. Request a quiz
+### 2. Get all movies count
 ```
-curl -X POST "http://localhost:8081/v1/quizzes" -H "accept: */*" -H "Accept-Language: pt_BR" -H "PlayerId: 0" -d ""
-```
-
-### 4. Answer the quiz
-```
-curl -X POST "http://localhost:8081/v1/bets" -H "accept: */*" -H "Accept-Language: pt_BR" -H "PlayerId: 0" -H "Content-Type: application/json" -d "{\"optionId\":\"tt2576852\"}"
+curl -X GET "http://localhost:8085/v1/movies/count" -H "accept: */*" -H "Accept-Language: pt_BR"
 ```
 
-### 5. Get the ranking
+### 3. Get movie by imdb id
 ```
-curl -X GET "http://localhost:8081/v1/rankings" -H "accept: */*" -H "Accept-Language: pt_BR"
+curl -X GET "http://localhost:8085/v1/movies/byImdbId/tt0468569" -H "accept: */*" -H "Accept-Language: pt_BR"
 ```
 
 ## Solution Structure

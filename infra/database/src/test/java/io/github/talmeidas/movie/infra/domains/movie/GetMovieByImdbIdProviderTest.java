@@ -4,23 +4,19 @@ import io.github.talmeidas.movie.core.domains.movie.model.Movie;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @DisplayName("Get Movie By ImdbId Provider Test")
-@EnableAutoConfiguration
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@ContextConfiguration(classes = GetMovieByImdbIdProvider.class)
 @Import({GetMovieByImdbIdProvider.class})
 @Sql("GetMovieByImdbIdProviderTest.sql")
 class GetMovieByImdbIdProviderTest {
@@ -28,8 +24,19 @@ class GetMovieByImdbIdProviderTest {
     @Autowired
     private GetMovieByImdbIdProvider getMovieByImdbIdProvider;
 
-    @MockBean
+    @Autowired
     private MovieRepository movieRepository;
+
+    @DisplayName("Fail to get movie by imdbId when imdbId does not exist")
+    @Test
+    void failToGetMovieByImdbIdWhenImdbIdDoesNotExist() {
+        // Arrange
+        // Act
+        final Optional<Movie> optional = getMovieByImdbIdProvider.execute("tt0468590");
+
+        // Assert
+        assertThat(optional).isNotPresent();
+    }
 
     @DisplayName("Get Movie By ImdbId")
     @Test
